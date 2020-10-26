@@ -1,12 +1,10 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-
 int arr[10];
+int address[10];
+char symbol[10][100];
 int val;
-
-
-
 void main()
 {
 for(int i=0;i<10;i++) 
@@ -24,7 +22,6 @@ printf("OUTPUT\n");
 if(strcmp(m1,"START")==0)
 {
  sa=op1;
- //printf("%d\n\n",sa);
  lc=sa;
  printf("\t%s\t%s\t%d",la,m1,op1);
  }
@@ -46,13 +43,12 @@ while(!feof(f1))
  	if(arr[val]==0) {
  		arr[val]=1;
  		fprintf(f3,"%d\t%s\n",lc,la);
+ 		strcpy(symbol[val],la);
+ 		address[val]=lc;
  		break;
  		}
  	else
  		val=(val+1)%10;
- 	
- 	
- 	
  	}
  if(temp==10)
  	printf("hash table is full\n");
@@ -100,23 +96,13 @@ while(!feof(f1))
     fclose(f3);
     printf("\n");
     printf("\n\nsymtab.txt\n\n");
-    f4 = fopen("symtab.txt", "r");
-    str = fgetc(f4);
-  
-    while (!feof(f4)) {
-  
-        printf("%c", str);
-        str = fgetc(f4);
-    }
-    printf("\n");
-    fclose(f4);
-    //printf("%d\n\n",lc);
-    printf("Length:%d\n",lc-sa-3);
+    printf("INDEX\tADDRESS\tSYMBOL\n\n");
+    for(int i=0;i<10;i++) {
+    	if(arr[i]==1) {
+    		printf("%d\t%d\t%s\n",i,address[i],symbol[i]);
+    		}
+    	}
+    printf("\nLength:%d\n",lc-sa-3);
     }
     fclose(f1);
-    
-    printf("\n.....hash structure.....\n\n");
-    for(int i=0;i<10;i++)
-    	printf("%d\t",arr[i]);
-    printf("\n");
     }
